@@ -9,6 +9,12 @@
 <body onload="onInit()">
     <main>
 
+        <header>
+            <h1>Meme it!</h1>
+            
+            <h2 onclick="loadGallery()">Gallery</h2>
+        </header>
+
         <section class="main-gallery">
             <section class="gallery"></section>
         </section>
@@ -16,9 +22,14 @@
         
         <section class="main-editor hidden">
             <canvas class="main-canvas" width="500px" height="500px"></canvas>
+            <article class="tools">
+                <input oninput="editText(event)" type="text" name="" id="text-box" placeholder="Add Text Here">
+                <input onchange="(changeColor(event))" type="color" name="" id="text-color">
+            </article>
         </section>
     </main>
 
+    <script src="js/meme-service.js"></script>
     <script src="js/meme-controller.js"></script>
 </body>
 </html>
