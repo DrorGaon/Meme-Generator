@@ -6,3 +6,18 @@
     text-align: center;
     background-color: lightblue;
 }
+
+.gallery{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    grid-auto-flow: dense;
+}
+
+img{
+    max-width: 100%;
+}
+
+.hidden{
+    display: none;
+}
