@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/editor.css">
+    <link rel="stylesheet" href="css/gallery.css">
     <title>Meme Generator</title>
 </head>
 <body onload="onInit()">
@@ -11,12 +13,21 @@
 
         <header>
             <h1>Meme it!</h1>
-            
             <h2 onclick="loadGallery()">Gallery</h2>
         </header>
 
         <section class="main-gallery">
-            <section class="gallery"></section>
+            <article class="search-bar">
+                <input type="text" placeholder="Search">
+                <article class="search-words">
+                    funny
+                    men
+                    women
+                    angry
+                </article>
+                <button>more</button>
+            </article>
+            <article class="gallery"></article>
         </section>
         
         
