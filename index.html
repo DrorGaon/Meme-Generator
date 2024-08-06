@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/d9e89bce30.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/editor.css">
     <link rel="stylesheet" href="css/gallery.css">
@@ -35,7 +36,19 @@
             <canvas class="main-canvas" width="500px" height="500px"></canvas>
             <article class="tools">
                 <input oninput="editText(event)" type="text" name="" id="text-box" placeholder="Add Text Here">
-                <input onchange="(changeColor(event))" type="color" name="" id="text-color">
+                <article class="text-tools">
+                    <article class="size-tools">
+                        <button onclick="onTextSizeChange(this)">-</button>
+                        <input onchange="onTextSizeChange(this)" type="number" name="text-size" id="text-size" value="42" min="16" max="72">
+                        <button onclick="onTextSizeChange(this)">+</button>
+                    </article>
+                    <label class="text-color" for="text-color">
+                        <i class="fa-solid fa-droplet"></i>
+                    </label>
+                    <input class="hidden" oninput="(changeColor(event))" type="color" name="" id="text-color">
+                </article>
+                <a onclick="downloadImg(this)" class="download" href="#" download="my-meme.jpg">Download</a>
+
             </article>
         </section>
     </main>

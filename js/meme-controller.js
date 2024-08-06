@@ -36,6 +36,7 @@ function onSelectImage(idx){
 }
 
 function changeColor({target}){
+    document.querySelector('.text-color').style.color = target.value
     editMeme('text-color', target.value)
     renderMeme()   
 }
@@ -48,7 +49,7 @@ function editText({target}){
 
 function renderMeme(){
     const meme = getMeme()
-    const {text, color} = meme.lines[meme.selectedLineIdx]
+    const {text, color, size} = meme.lines[meme.selectedLineIdx]
     const elImg = new Image()
     elImg.src = `img/${meme.selectedImgId}.jpg`
     gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
@@ -57,10 +58,24 @@ function renderMeme(){
     gCtx.lineWidth = 2
     gCtx.strokeStyle = 'black'
     gCtx.fillStyle = color
-    gCtx.font = '60px Arial'
+    gCtx.font = `${size}px Arial`
     gCtx.textAlign = 'center'
     gCtx.textBaseline = 'middle'
 
     gCtx.fillText(text, gElCanvas.width / 2, gElCanvas.height / 2)
     gCtx.strokeText(text, gElCanvas.width / 2, gElCanvas.height / 2)
+}
+
+function downloadImg(elLink){
+    const imgContent = gElCanvas.toDataURL('image/jpeg') // image/jpeg the default format
+    elLink.href = imgContent
+}
+
+function onTextSizeChange(elInput){
+    let {value} = elInput
+    if (!value){
+        if(elInput.innerText === "-") editMeme('decrease')
+        else editMeme('increase')
+    } else editMeme('text-size', value)
+    renderMeme()
 }

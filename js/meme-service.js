@@ -27,7 +27,7 @@ let gMeme = {
     lines: [
         {
             text: 'Sample text',
-            size: 60,
+            size: 42,
             color: 'white',
         }
     ],
@@ -52,6 +52,14 @@ function editMeme(target, value){
         case 'text-color':
             gMeme.lines[gMeme.selectedLineIdx].color = value
             break;
+        case 'text-size':
+            gMeme.lines[gMeme.selectedLineIdx].size = value
+            break;
+        case 'increase':
+            gMeme.lines[gMeme.selectedLineIdx].size++ 
+            break;
+        case 'decrease':
+            gMeme.lines[gMeme.selectedLineIdx].size--
+            break;
         }
 }
-

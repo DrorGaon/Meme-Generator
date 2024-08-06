@@ -5,6 +5,8 @@
 :root{
     --primary-1: #383B42;
     --primary-2: #22252C;
+    --border-radius:15px ;
+    --editor-btn-shadow: 0 5px 2px 0px #3E7D7A;
 }
 
 body{
@@ -44,10 +46,14 @@ header h2{
 
 img{
     max-width: 100%;
-    border-radius: 15px;
+    border-radius: var(--border-radius);
     box-shadow: 0px 5px 6px 0px var(--primary-2);
 }
 
 .hidden{
     display: none;
+}
+
+input:focus{
+    outline: 2px solid turquoise;
 }
