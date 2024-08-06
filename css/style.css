@@ -11,6 +11,10 @@ body{
     background-color: var(--primary-2);
 }
 
+h1, h2, h3, h4, h5, h6, p{
+    margin: 0;
+}
+
 main{
     display: flex;
     flex-direction: column;
@@ -25,6 +29,7 @@ header{
     justify-content: space-between;
     align-items: center;
 
+    height: 80px;
     background: linear-gradient(90deg, rgba(15,151,176,1) 0%, rgba(48,187,114,1) 100%);
     padding-inline: 5rem;
     border-radius: 999px;
@@ -35,11 +40,6 @@ header{
 
 header h2{
     cursor: pointer;
-}
-
-.main-editor{
-    text-align: center;
-    background-color: lightblue;
 }
 
 img{

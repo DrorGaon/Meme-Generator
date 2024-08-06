@@ -1,0 +1,32 @@
+.main-editor{
+    display: flex;
+    justify-content: space-evenly;
+    background-color: var(--primary-2);
+}
+
+.main-canvas{
+    border-radius: 15px;
+}
+
+.tools{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+
+    background-color: var(--primary-1);
+    width: 500px;
+    height: 500px;
+    padding: 1rem;
+    border-radius: 15px;
+}
+
+#text-box{
+    width: 90%;
+    height: 60px;
+    padding-inline: 1rem;
+    border-radius: 999px;
+    border: none;
+
+    font-size: 1.25rem;
+}
