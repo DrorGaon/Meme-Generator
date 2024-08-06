@@ -42,13 +42,15 @@
                         <input onchange="onTextSizeChange(this)" type="number" name="text-size" id="text-size" value="42" min="16" max="72">
                         <button onclick="onTextSizeChange(this)">+</button>
                     </article>
-                    <label class="text-color" for="text-color">
-                        <i class="fa-solid fa-droplet"></i>
-                    </label>
-                    <input class="hidden" oninput="(changeColor(event))" type="color" name="" id="text-color">
+                    <article class="text-color-container">
+                        <label class="text-color" for="text-color">
+                            <i class="fa-solid fa-droplet"></i>
+                        </label>
+                        <input oninput="(changeColor(event))" type="color" name="" id="text-color">
+                    </article>
                 </article>
                 <a onclick="downloadImg(this)" class="download" href="#" download="my-meme.jpg">Download</a>
-
+                
             </article>
         </section>
     </main>

@@ -94,9 +94,14 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+.text-color-container{
+    position: relative;
+}
+
 #text-color{
-    position: fixed;
-    inset: 0;
+    position: absolute;
+    opacity: 0;
+    z-index: 1;
 }
 
 .text-color{
@@ -112,4 +117,5 @@ input::-webkit-inner-spin-button {
     font-size: 1.35rem;
     box-shadow: var(--editor-btn-shadow);
     cursor: pointer;
+    z-index: 10;
 }
