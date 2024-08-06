@@ -74,7 +74,7 @@ function isLineClicked({x, y}){
 
 function getWidthAndHeight(){
     const width = gCtx.measureText(gMeme.lines[gMeme.selectedLineIdx].text).width
-    const height = gCtx.measureText(gMeme.lines[gMeme.selectedLineIdx].text).actualBoundingBoxAscent + gCtx.measureText(gMeme.lines[0]).actualBoundingBoxDescent
+    const height = gCtx.measureText(gMeme.lines[gMeme.selectedLineIdx].text).fontBoundingBoxAscent + gCtx.measureText(gMeme.lines[0]).fontBoundingBoxDescent
     return {width, height}
 }
 
