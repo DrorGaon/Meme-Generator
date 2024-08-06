@@ -24,11 +24,13 @@ let gImgs = [
 let gMeme = {
     selectedImgId: 2,
     selectedLineIdx: 0,
+    isDrag: false,
     lines: [
         {
             text: 'Sample text',
             size: 42,
             color: 'white',
+            pos: {x: 250, y:250},
         }
     ],
 }
@@ -62,4 +64,25 @@ function editMeme(target, value){
             gMeme.lines[gMeme.selectedLineIdx].size--
             break;
         }
+}
+
+function isLineClicked({x, y}){
+    const {width, height} = getWidthAndHeight()
+
+     return (Math.abs(gMeme.lines[gMeme.selectedLineIdx].pos.x - x) < width / 2 && Math.abs(gMeme.lines[gMeme.selectedLineIdx].pos.y - y) < height / 2)
+}
+
+function getWidthAndHeight(){
+    const width = gCtx.measureText(gMeme.lines[gMeme.selectedLineIdx].text).width
+    const height = gCtx.measureText(gMeme.lines[gMeme.selectedLineIdx].text).actualBoundingBoxAscent + gCtx.measureText(gMeme.lines[0]).actualBoundingBoxDescent
+    return {width, height}
+}
+
+function setLineDrag(isDrag){
+    gMeme.isDrag = isDrag
+}
+
+function moveLine(dx, dy){
+    gMeme.lines[gMeme.selectedLineIdx].pos.x += dx
+    gMeme.lines[gMeme.selectedLineIdx].pos.y += dy
 }
