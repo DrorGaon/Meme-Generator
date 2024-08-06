@@ -52,9 +52,7 @@ function renderMeme(){
     const {text, color, size} = meme.lines[meme.selectedLineIdx]
     const elImg = new Image()
     elImg.src = `img/${meme.selectedImgId}.jpg`
-    elImg.onload = () => {
-        gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
-    }
+    gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
 
     gCtx.beginPath()
     gCtx.lineWidth = 2
