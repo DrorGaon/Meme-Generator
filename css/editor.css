@@ -111,4 +111,5 @@ input::-webkit-inner-spin-button {
 
     font-size: 1.35rem;
     box-shadow: var(--editor-btn-shadow);
+    cursor: pointer;
 }
