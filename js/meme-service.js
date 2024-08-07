@@ -31,6 +31,7 @@ let gMeme = {
             size: 42,
             font: 'Impact',
             color: 'gray',
+            outline: 'black',
             pos: {x: 250, y:60},
         }
     ],
@@ -60,6 +61,9 @@ function editMeme(target, value){
             break;
         case 'text-color':
             gMeme.lines[gMeme.selectedLineIdx].color = value
+            break;
+        case 'text-outline':
+            gMeme.lines[gMeme.selectedLineIdx].outline = value
             break;
         case 'text-size':
             gMeme.lines[gMeme.selectedLineIdx].size = value
@@ -95,6 +99,7 @@ function addLine(){
             size: 42,
             font: 'Impact',
             color: 'gray',
+            outline: 'black',
             pos: {x: x, y: y},
         })
     gMeme.selectedLineIdx = gMeme.lines.length-1

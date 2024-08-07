@@ -174,13 +174,13 @@ input::-webkit-inner-spin-button {
     position: relative;
 }
 
-#text-color{
+#text-color, #text-outline{
     position: absolute;
     opacity: 0;
     z-index: 1;
 }
 
-.text-color{
+.text-color, .text-outline{
     display: flex;
     justify-content: center;
     align-items: center;

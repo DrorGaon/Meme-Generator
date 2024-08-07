@@ -50,7 +50,7 @@ function renderMeme() {
     if(!lines.length) return
     
     lines.forEach(line => {
-        let { text, color, size, pos, font} = line
+        let { text, color, outline, size, pos, font} = line
         if(!text){
             text = 'Sample text'
             editMeme('text', text)
@@ -58,7 +58,7 @@ function renderMeme() {
 
         gCtx.beginPath()
         gCtx.lineWidth = 2
-        gCtx.strokeStyle = 'black'
+        gCtx.strokeStyle = outline
         gCtx.fillStyle = color
         gCtx.font = `${size}px ${font}`
         gCtx.textAlign = 'center'
@@ -74,7 +74,7 @@ function renderMeme() {
 
 function onChangeColor({ target }) {
     document.querySelector('.text-color').style.color = target.value
-    editMeme('text-color', target.value)
+    editMeme(target.id, target.value)
     renderMeme()
 }
 
@@ -212,4 +212,7 @@ function renderMemeValues(){
 
     const elTextColor = document.querySelector('.text-color')
     elTextColor.style.color = selectedLine.color
+
+    const elTextOutline = document.querySelector('.text-outline')
+    elTextOutline.style.color = selectedLine.outline
 }
