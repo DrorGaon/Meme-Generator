@@ -30,7 +30,7 @@ let gMeme = {
             text: 'Sample text',
             size: 42,
             color: 'gray',
-            pos: {x: 250, y:250},
+            pos: {x: 250, y:60},
         }
     ],
 }
@@ -48,6 +48,8 @@ function getMeme(){
 }
 
 function editMeme(target, value){
+    if(!gMeme.lines.length) return
+
     switch (target) {
         case 'image':
             gMeme.selectedImgId = value
@@ -75,15 +77,30 @@ function setSelectedLine(idx){
 }
 
 function addLine(){
-    const {x, y} = gMeme.lines[gMeme.selectedLineIdx].pos
+    let x, y
+    if(!gMeme.lines.length){
+        x = 250
+        y = 60
+    } else {
+        x = gMeme.lines[gMeme.selectedLineIdx].pos.x + 20
+        y = gMeme.lines[gMeme.selectedLineIdx].pos.y + 20
+    }
     gMeme.lines.push(
         {
             text: 'Sample text',
             size: 42,
             color: 'gray',
-            pos: {x: x + 20, y: y + 20},
+            pos: {x: x, y: y},
         })
     gMeme.selectedLineIdx = gMeme.lines.length-1
+}
+
+function deleteLine(){
+    if(!gMeme.lines.length) return
+    const {lines} = gMeme
+
+    lines.splice(gMeme.selectedLineIdx, 1)
+    if(gMeme.selectedLineIdx === lines.length) gMeme.selectedLineIdx = 0
 }
 
 function isLineClicked({x, y}){
@@ -103,7 +120,7 @@ function isLineClicked({x, y}){
 function getLineSizes(){
     let lineSizes = []
     lineSizes = gMeme.lines.map((line, idx) => {
-        // console.log(line)
+        // console.log(idx)
         gCtx.font = `${line.size}px Arial`
         let width = gCtx.measureText(line.text).width
         let height = gCtx.measureText(line.text).fontBoundingBoxAscent + gCtx.measureText(line.text).fontBoundingBoxDescent

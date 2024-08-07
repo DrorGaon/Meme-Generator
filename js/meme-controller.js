@@ -47,7 +47,8 @@ function renderMeme() {
     const elImg = new Image()
     elImg.src = `img/${meme.selectedImgId}.jpg`
     gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
-
+    if(!lines.length) return
+    
     lines.forEach(line => {
         let { text, color, size, pos } = line
         if(!text){
@@ -107,6 +108,11 @@ function onSwitchLine(){
 
 function onAddLine(){
     addLine()
+    renderMeme()
+}
+
+function onDeleteLine(){
+    deleteLine()
     renderMeme()
 }
 
@@ -186,7 +192,7 @@ function outlineSelectedLine(){
 function renderMemeValues(){
     const meme = getMeme()
     const {lines} = meme
-    const selectedLine = meme.lines[meme.selectedLineIdx]
+    const selectedLine = lines[meme.selectedLineIdx]
 
     document.querySelector('#text-size').value = selectedLine.size
     const elTextBox = document.querySelector('#text-box')

@@ -81,6 +81,16 @@
     text-shadow: 0px 3px 2px hsl(129, 54%, 25%);
 }
 
+.delete-line-btn{
+    background-color: hsl(354, 70%, 50%);
+
+    box-shadow: 1px 5px 0 hsl(354, 70%, 25%), inset 0 5px 0 hsl(354, 70%, 70%);
+}
+
+.delete-line-btn i {
+    text-shadow: 0px 3px 2px hsl(354, 70%, 25%);
+}
+
 .text-tools{
     display: grid;
     grid-template-columns: repeat(5, minmax(0, 1fr));
