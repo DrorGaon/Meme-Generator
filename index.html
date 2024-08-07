@@ -30,16 +30,17 @@
             </article>
             <article class="gallery"></article>
         </section>
-        
-        
+         
         <section class="main-editor hidden">
             <canvas class="main-canvas" width="500px" height="500px"></canvas>
             <article class="tools">
                 <input oninput="editText(event)" type="text" name="" id="text-box" placeholder="Add Text Here">
+                <button class="add-line-btn" onclick="onAddLine()"><i class="fa-solid fa-plus"></i></button>
+
                 <article class="text-tools">
                     <article class="size-tools">
                         <button onclick="onTextSizeChange(this)">-</button>
-                        <input onchange="onTextSizeChange(this)" type="number" name="text-size" id="text-size" value="42" min="16" max="72">
+                        <input onchange="onTextSizeChange(this)" type="number" name="text-size" id="text-size" value="42">
                         <button onclick="onTextSizeChange(this)">+</button>
                     </article>
                     <article class="text-color-container">

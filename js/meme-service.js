@@ -35,6 +35,10 @@ let gMeme = {
     ],
 }
 
+function print(){
+    console.log(gMeme.lines)
+}
+
 function getImgs(){
     return gImgs
 }
@@ -66,16 +70,52 @@ function editMeme(target, value){
         }
 }
 
-function isLineClicked({x, y}){
-    const {width, height} = getWidthAndHeight()
+function setSelectedLine(idx){
+    gMeme.selectedLineIdx = idx
+    const elTextBox = document.querySelector('#text-box')
+    const placeholder = gMeme.lines[gMeme.selectedLineIdx].text
+    if (placeholder === 'Sample text') elTextBox.value = ''
+    else elTextBox.value = placeholder
+}
 
-     return (Math.abs(gMeme.lines[gMeme.selectedLineIdx].pos.x - x) < width / 2 && Math.abs(gMeme.lines[gMeme.selectedLineIdx].pos.y - y) < height / 2)
+function addLine(){
+    const {x, y} = gMeme.lines[gMeme.selectedLineIdx].pos
+    gMeme.lines.push(
+        {
+            text: 'Sample text',
+            size: 42,
+            color: 'white',
+            pos: {x: x + 20, y: y + 20},
+        })
+    gMeme.selectedLineIdx = gMeme.lines.length-1
+}
+
+function isLineClicked({x, y}){
+    const res = {isClicked: false, idx: 0}
+    const lineSizes = getWidthAndHeight()
+    gMeme.lines.forEach((line, idx) => {
+        const {width, height} = lineSizes[idx]
+        if(Math.abs(line.pos.x - x) < width / 2 && Math.abs(line.pos.y - y) < height / 2){
+            res.isClicked = true
+            res.idx = idx
+        }
+    })
+
+    return res
 }
 
 function getWidthAndHeight(){
-    const width = gCtx.measureText(gMeme.lines[gMeme.selectedLineIdx].text).width
-    const height = gCtx.measureText(gMeme.lines[gMeme.selectedLineIdx].text).fontBoundingBoxAscent + gCtx.measureText(gMeme.lines[0]).fontBoundingBoxDescent
-    return {width, height}
+    let lineSizes = []
+    lineSizes = gMeme.lines.map((line, idx) => {
+        // console.log(line)
+        let width = gCtx.measureText(line.text).width
+        let height = gCtx.measureText(line.text).fontBoundingBoxAscent + gCtx.measureText(line.text).fontBoundingBoxDescent
+        let size = {width, height, idx}
+        // console.log(size)
+        return size
+    })
+    // console.log(lineSizes)
+    return lineSizes
 }
 
 function setLineDrag(isDrag){

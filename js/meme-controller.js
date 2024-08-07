@@ -32,12 +32,13 @@ function onSelectImage(idx) {
     document.querySelector('.main-editor').classList.remove('hidden')
     document.querySelector('.main-gallery').classList.add('hidden')
 
+    editMeme('image', idx)
     const elImg = new Image()
     elImg.src = `img/${idx}.jpg`
     elImg.onload = () => {
         gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
+        renderMeme()
     }
-    editMeme('image', idx)
 }
 
 function changeColor({ target }) {
@@ -54,24 +55,27 @@ function editText({ target }) {
 
 function renderMeme() {
     const meme = getMeme()
+    const {lines} = meme
     const { text, color, size, pos } = meme.lines[meme.selectedLineIdx]
     const { x, y } = pos
     const elImg = new Image()
     elImg.src = `img/${meme.selectedImgId}.jpg`
     gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
 
-    gCtx.beginPath()
-    gCtx.lineWidth = 2
-    gCtx.strokeStyle = 'black'
-    gCtx.fillStyle = color
-    gCtx.font = `${size}px Arial`
-    gCtx.textAlign = 'center'
-    gCtx.textBaseline = 'middle'
+    lines.forEach(line => {
+        gCtx.beginPath()
+        gCtx.lineWidth = 2
+        gCtx.strokeStyle = 'black'
+        gCtx.fillStyle = line.color
+        gCtx.font = `${line.size}px Arial`
+        gCtx.textAlign = 'center'
+        gCtx.textBaseline = 'middle'
+    
+        gCtx.fillText(line.text, line.pos.x, line.pos.y)
+        gCtx.strokeText(line.text, line.pos.x, line.pos.y)
+    })
 
-    gCtx.fillText(text, x, y)
-    gCtx.strokeText(text, x, y)
-
-    outlineText()
+    outlineSelectedLine()
     document.querySelector('#text-size').value = size
 }
 
@@ -89,10 +93,18 @@ function onTextSizeChange(elInput) {
     renderMeme()
 }
 
+function onAddLine(){
+    addLine()
+    renderMeme()
+}
+
 function onDown(ev) {
     const pos = getEvPos(ev)
-    if (!isLineClicked(pos)) return
+    const res = isLineClicked(pos)
+    if (!res.isClicked) return
 
+    setSelectedLine(res.idx)
+    renderMeme()
     setLineDrag(true)
     gStartPos = pos
 }
@@ -147,10 +159,12 @@ function getEvPos(ev) {
     return pos
 }
 
-function outlineText(){
-    const {width, height} = getWidthAndHeight()
-    const meme = getMeme()
-    const {pos} = meme.lines[meme.selectedLineIdx]
+function outlineSelectedLine(){
+    let lineSizes = getWidthAndHeight()
+    let meme = getMeme()
+    let {width, height, idx} = lineSizes[meme.selectedLineIdx]
+    let {pos} = meme.lines[idx]
+
     gCtx.beginPath()
     gCtx.strokeStyle = 'black'
     gCtx.rect((pos.x - width / 2) - 5, (pos.y - height / 2) - 5 ,width + 10, height + 5)
