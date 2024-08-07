@@ -50,7 +50,7 @@ function renderMeme() {
     if(!lines.length) return
     
     lines.forEach(line => {
-        let { text, color, size, pos } = line
+        let { text, color, size, pos, font} = line
         if(!text){
             text = 'Sample text'
             editMeme('text', text)
@@ -60,7 +60,7 @@ function renderMeme() {
         gCtx.lineWidth = 2
         gCtx.strokeStyle = 'black'
         gCtx.fillStyle = color
-        gCtx.font = `${size}px Arial`
+        gCtx.font = `${size}px ${font}`
         gCtx.textAlign = 'center'
         gCtx.textBaseline = 'middle'
     
@@ -113,6 +113,11 @@ function onAddLine(){
 
 function onDeleteLine(){
     deleteLine()
+    renderMeme()
+}
+
+function onChangeFont({target}){
+   editMeme('font', target.value)
     renderMeme()
 }
 

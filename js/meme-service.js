@@ -29,6 +29,7 @@ let gMeme = {
         {
             text: 'Sample text',
             size: 42,
+            font: 'Impact',
             color: 'gray',
             pos: {x: 250, y:60},
         }
@@ -69,6 +70,9 @@ function editMeme(target, value){
         case 'decrease':
             gMeme.lines[gMeme.selectedLineIdx].size--
             break;
+        case 'font':
+            gMeme.lines[gMeme.selectedLineIdx].font = value
+            break;
         }
 }
 
@@ -89,6 +93,7 @@ function addLine(){
         {
             text: 'Sample text',
             size: 42,
+            font: 'Impact',
             color: 'gray',
             pos: {x: x, y: y},
         })
@@ -121,7 +126,7 @@ function getLineSizes(){
     let lineSizes = []
     lineSizes = gMeme.lines.map((line, idx) => {
         // console.log(idx)
-        gCtx.font = `${line.size}px Arial`
+        gCtx.font = `${line.size}px ${line.font}`
         let width = gCtx.measureText(line.text).width
         let height = gCtx.measureText(line.text).fontBoundingBoxAscent + gCtx.measureText(line.text).fontBoundingBoxDescent
         let size = {width, height, idx}

@@ -6,7 +6,9 @@
     --primary-1: #383B42;
     --primary-2: #22252C;
     --border-radius:15px ;
+    --button-border-radius: 7px;
     --editor-btn-shadow: 0 5px 2px 0px #3E7D7A;
+    --button-transition: .3s
 }
 
 body{
@@ -56,6 +58,6 @@ img{
     display: none;
 }
 
-input:focus{
+input:focus, select:focus{
     outline: 2px solid turquoise;
 }

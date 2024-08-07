@@ -39,7 +39,6 @@
                     <button class="switch-line-btn" onclick="onSwitchLine()"><i class="fa-solid fa-right-left"></i></button>
                     <button class="add-line-btn" onclick="onAddLine()"><i class="fa-solid fa-plus"></i></button>
                     <button class="delete-line-btn" onclick="onDeleteLine()"><i class="fa-regular fa-trash-can"></i></button>
-
                 </article>
 
                 <article class="text-tools">
@@ -47,6 +46,20 @@
                         <button onclick="onTextSizeChange(this)">-</button>
                         <input onchange="onTextSizeChange(this)" type="number" name="text-size" id="text-size" value="42">
                         <button onclick="onTextSizeChange(this)">+</button>
+                    </article>
+                    <article class="font-tools">
+                        <select onchange="onChangeFont(event)" id="">
+                            <option selected="selected" value="Impact">Impact</option>
+                            <option value="Arial">Arial</option>
+                            <option value="Comic Sans MS">Comic Sans</option>
+                            <option value="Verdana">Verdana</option>
+                            <option value="Tahoma">Tahoma</option>
+                            <option value="Trebuchet MS">Trebuchet MS</option>
+                            <option value="Times New Roman">Times New Roman</option>
+                            <option value="Georgia">Georgia</option>
+                            <option value="Courier New">Courier New</option>
+                            <option value="Brush Script MT">Brush Script MT</option>
+                        </select>
                     </article>
                     <article class="text-color-container">
                         <label class="text-color" for="text-color">

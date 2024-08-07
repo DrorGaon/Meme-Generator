@@ -112,11 +112,14 @@
 .size-tools input{
     width: 75px;
     height: 50px;
+    padding: 0;
     border: none;
     border-radius: 10px;
 
     text-align: center;
     font-size: 1.5rem;
+    font-family: monospace;
+    font-weight: bold;
     margin-inline: 0.25rem;
     box-shadow: var(--editor-btn-shadow);
 
@@ -144,6 +147,24 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+.font-tools{
+    grid-column: 3 / -1 ;
+}
+
+.font-tools select{
+    width: 200px;
+    height: 50px;
+    border: none;
+    padding-inline: .75rem;
+    border-radius: var(--button-border-radius);
+
+    font-size: 1.5em;
+    font-family: monospace;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: var(--editor-btn-shadow);
 }
 
 .text-color-container{
