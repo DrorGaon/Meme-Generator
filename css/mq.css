@@ -39,6 +39,13 @@
     }
 }
 
+@media (min-width: 1200px){
+    .main-editor{
+        flex-direction: row;
+        gap: 3rem;
+    }
+}
+
 @media (min-width: 1360px){
     main{
         width: 1260px;
@@ -53,9 +60,5 @@
     
     header{
         margin-inline: 0;
-    }
-
-    .main-editor{
-        flex-direction: row;
     }
 }
