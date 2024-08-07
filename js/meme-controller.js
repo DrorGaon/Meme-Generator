@@ -44,18 +44,18 @@ function onSelectImage(idx) {
 
 function renderMeme() {
     const meme = getMeme()
-    const {lines} = meme
+    const { lines } = meme
     const elImg = new Image()
     elImg.src = `img/${meme.selectedImgId}.jpg`
     gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
-    if(!lines.length) return
-    
+    if (!lines.length) return
+
     lines.forEach(line => {
-        let { text, color, outline, size, pos, font} = line
-        if(!text){
+        let { text, color, outline, size, pos, font } = line
+        if (!text) {
             text = 'Sample text'
             editMeme('text', text)
-        } 
+        }
 
         gCtx.beginPath()
         gCtx.lineWidth = 2
@@ -64,7 +64,7 @@ function renderMeme() {
         gCtx.font = `${size}px ${font}`
         gCtx.textAlign = 'center'
         gCtx.textBaseline = 'middle'
-    
+
         gCtx.fillText(text, pos.x, pos.y)
         gCtx.strokeText(text, pos.x, pos.y)
     })
@@ -75,7 +75,7 @@ function renderMeme() {
 
 function onChangeColor({ target }) {
     const meme = getMeme()
-    if(meme.selectedLineIdx === -1) return
+    if (meme.selectedLineIdx === -1) return
     document.querySelector('.text-color').style.color = target.value
     editMeme(target.id, target.value)
     renderMeme()
@@ -83,7 +83,7 @@ function onChangeColor({ target }) {
 
 function editText({ target }) {
     const meme = getMeme()
-    if(meme.selectedLineIdx === -1) return
+    if (meme.selectedLineIdx === -1) return
     editMeme('text', target.value)
     renderMeme()
 }
@@ -95,7 +95,7 @@ function downloadImg(elLink) {
 
 function onTextSizeChange(elInput) {
     const meme = getMeme()
-    if(meme.selectedLineIdx === -1) return
+    if (meme.selectedLineIdx === -1) return
     let { value } = elInput
     if (!value) {
         if (elInput.innerText === "-") editMeme('decrease')
@@ -104,36 +104,36 @@ function onTextSizeChange(elInput) {
     renderMeme()
 }
 
-function onSwitchLine(){
-    let {selectedLineIdx: idx, lines} = getMeme()
+function onSwitchLine() {
+    let { selectedLineIdx: idx, lines } = getMeme()
     idx += 1
-    if(idx === lines.length) idx = 0
+    if (idx === lines.length) idx = 0
     setSelectedLine(idx)
     renderMeme()
 }
 
-function onAddLine(){
+function onAddLine() {
     addLine()
     renderMeme()
 }
 
-function onDeleteLine(){
+function onDeleteLine() {
     const meme = getMeme()
-    if(meme.selectedLineIdx === -1) return
+    if (meme.selectedLineIdx === -1) return
     deleteLine()
     renderMeme()
 }
 
-function onChangeFont({target}){
+function onChangeFont({ target }) {
     const meme = getMeme()
-    if(meme.selectedLineIdx === -1) return
-   editMeme('font', target.value)
-   renderMeme()
+    if (meme.selectedLineIdx === -1) return
+    editMeme('font', target.value)
+    renderMeme()
 }
 
-function onAlignText(direction){
+function onAlignText(direction) {
     const meme = getMeme()
-    if(meme.selectedLineIdx === -1) return
+    if (meme.selectedLineIdx === -1) return
     alignText(direction)
     renderMeme()
 }
@@ -172,6 +172,7 @@ function onUp(ev) {
 function addListeners() {
     addMouseListeners()
     addTouchListeners()
+    addKeyboardListeners()
 }
 
 function addMouseListeners() {
@@ -184,6 +185,36 @@ function addTouchListeners() {
     gElCanvas.addEventListener('touchstart', onDown)
     gElCanvas.addEventListener('touchmove', onMove)
     gElCanvas.addEventListener('touchend', onUp)
+}
+
+function addKeyboardListeners() {
+    window.addEventListener('keydown', onKeyboardPress)
+}
+
+function onKeyboardPress(ev) {
+    const elTextBox = document.querySelector('#text-box')
+    const elTextSize = document.querySelector('#text-size')
+    const elGallery = document.querySelector('.main-gallery')
+    
+    if(!elGallery.classList.contains('hidden')) return
+    if(ev.target === elTextBox || ev.target === elTextSize) return
+
+    ev.preventDefault()
+    switch (ev.code) {
+        case 'ArrowRight':
+            moveLine(5, 0)
+            break;    
+        case 'ArrowLeft':
+            moveLine(-5, 0)
+            break;    
+        case 'ArrowUp':
+            moveLine(0, -5)
+            break;    
+        case 'ArrowDown':
+            moveLine(0, 5)
+            break;    
+    }
+    renderMeme()
 }
 
 function getEvPos(ev) {
@@ -203,25 +234,25 @@ function getEvPos(ev) {
     return pos
 }
 
-function outlineSelectedLine(){
+function outlineSelectedLine() {
     let lineSizes = getLineSizes()
     let meme = getMeme()
-    if(meme.selectedLineIdx === -1) return
-    let {width, height, idx} = lineSizes[meme.selectedLineIdx]
-    let {pos} = meme.lines[idx]
+    if (meme.selectedLineIdx === -1) return
+    let { width, height, idx } = lineSizes[meme.selectedLineIdx]
+    let { pos } = meme.lines[idx]
 
     gCtx.beginPath()
     gCtx.setLineDash([10, 10])
     gCtx.strokeStyle = 'red'
-    gCtx.roundRect((pos.x - width / 2) - 5, (pos.y - height / 2) - 5 ,width + 10, height + 5, 7)
+    gCtx.roundRect((pos.x - width / 2) - 5, (pos.y - height / 2) - 5, width + 10, height + 5, 7)
     gCtx.stroke()
     gCtx.setLineDash([])
 }
 
-function renderMemeValues(){
+function renderMemeValues() {
     const meme = getMeme()
-    if(meme.selectedLineIdx === -1) return
-    const {lines} = meme
+    if (meme.selectedLineIdx === -1) return
+    const { lines } = meme
     const selectedLine = lines[meme.selectedLineIdx]
 
     document.querySelector('#text-size').value = selectedLine.size

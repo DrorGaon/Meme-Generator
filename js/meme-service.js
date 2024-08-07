@@ -160,6 +160,7 @@ function setLineDrag(isDrag){
 }
 
 function moveLine(dx, dy){
+    if(gMeme.selectedLineIdx === -1) return
     gMeme.lines[gMeme.selectedLineIdx].pos.x += dx
     gMeme.lines[gMeme.selectedLineIdx].pos.y += dy
 }
