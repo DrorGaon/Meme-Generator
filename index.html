@@ -35,7 +35,11 @@
             <canvas class="main-canvas" width="500px" height="500px"></canvas>
             <article class="tools">
                 <input oninput="editText(event)" type="text" name="" id="text-box" placeholder="Add Text Here">
-                <button class="add-line-btn" onclick="onAddLine()"><i class="fa-solid fa-plus"></i></button>
+                <article class="line-tools">
+                    <button class="switch-line-btn" onclick="onSwitchLine()"><i class="fa-solid fa-right-left"></i></button>
+                    <button class="add-line-btn" onclick="onAddLine()"><i class="fa-solid fa-plus"></i></button>
+
+                </article>
 
                 <article class="text-tools">
                     <article class="size-tools">

@@ -93,6 +93,14 @@ function onTextSizeChange(elInput) {
     renderMeme()
 }
 
+function onSwitchLine(){
+    let {selectedLineIdx: idx, lines} = getMeme()
+    idx += 1
+    if(idx === lines.length) idx = 0
+    setSelectedLine(idx)
+    renderMeme()
+}
+
 function onAddLine(){
     addLine()
     renderMeme()
