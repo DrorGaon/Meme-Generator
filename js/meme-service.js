@@ -37,10 +37,6 @@ let gMeme = {
     ],
 }
 
-function print(){
-    console.log(gMeme.lines)
-}
-
 function getImgs(){
     return gImgs
 }
