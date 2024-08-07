@@ -210,9 +210,11 @@ function outlineSelectedLine(){
     let {pos} = meme.lines[idx]
 
     gCtx.beginPath()
+    gCtx.setLineDash([10, 10])
     gCtx.strokeStyle = 'red'
     gCtx.roundRect((pos.x - width / 2) - 5, (pos.y - height / 2) - 5 ,width + 10, height + 5, 7)
     gCtx.stroke()
+    gCtx.setLineDash([])
 }
 
 function renderMemeValues(){
