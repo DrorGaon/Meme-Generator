@@ -1,6 +1,6 @@
 'use strict'
 
-let gImgs = [
+const gImgs = [
     {id: 1, url: 'img/1.jpg', keywords: ['haha'],},
     {id: 2, url: 'img/2.jpg', keywords: ['haha'],},
     {id: 3, url: 'img/3.jpg', keywords: ['haha'],},
@@ -21,8 +21,8 @@ let gImgs = [
     {id: 18, url: 'img/18.jpg', keywords: ['haha'],},
 ]
 
-let gMeme = {
-    selectedImgId: 2,
+const gMeme = {
+    selectedImgId: 1,
     selectedLineIdx: 0,
     isDrag: false,
     lines: [
@@ -35,6 +35,23 @@ let gMeme = {
             pos: {x: 250, y:60},
         }
     ],
+}
+
+const defaultLine = {
+    text: 'Sample text',
+    size: 42,
+    font: 'Impact',
+    color: 'gray',
+    outline: 'black',
+    pos: {x: 250, y:60},
+}
+
+function resetMeme(){
+    gMeme.selectedImgId = 1
+    gMeme.selectedLineIdx = 0
+    gMeme.isDrag = false
+    gMeme.lines.length = 0
+    gMeme.lines.push(structuredClone(defaultLine))
 }
 
 function getImgs(){
@@ -81,23 +98,12 @@ function setSelectedLine(idx){
 }
 
 function addLine(){
-    let x, y
-    if(!gMeme.lines.length || gMeme.selectedLineIdx === -1){
-        x = 250
-        y = 60
-    } else {
-        x = gMeme.lines[gMeme.selectedLineIdx].pos.x + 20
-        y = gMeme.lines[gMeme.selectedLineIdx].pos.y + 20
-    }
-    gMeme.lines.push(
-        {
-            text: 'Sample text',
-            size: 42,
-            font: 'Impact',
-            color: 'gray',
-            outline: 'black',
-            pos: {x: x, y: y},
-        })
+    const line = structuredClone(defaultLine)
+    if(gMeme.lines.length && gMeme.selectedLineIdx !== -1){
+        line.pos.x = gMeme.lines[gMeme.selectedLineIdx].pos.x + 20
+        line.pos.y = gMeme.lines[gMeme.selectedLineIdx].pos.y + 20
+    } 
+    gMeme.lines.push(line)
     gMeme.selectedLineIdx = gMeme.lines.length-1
 }
 

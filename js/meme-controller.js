@@ -33,6 +33,9 @@ function onSelectImage(idx) {
     document.querySelector('.main-editor').style.display = 'flex'
     document.querySelector('.main-gallery').classList.add('hidden')
 
+    const {selectedImgId} = getMeme()
+    if(selectedImgId + '' !== idx) resetMeme()
+    
     editMeme('image', idx)
     const elImg = new Image()
     elImg.src = `img/${idx}.jpg`
