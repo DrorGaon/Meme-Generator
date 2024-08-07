@@ -8,6 +8,7 @@ const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
 
 
 function onInit() {
+    document.querySelector('.main-editor').style.display = 'none'
     const elGallery = document.querySelector('.gallery')
     let strHTML = ''
     getImgs().map(({ url, id }) => {
@@ -24,12 +25,12 @@ function onInit() {
 }
 
 function loadGallery() {
-    document.querySelector('.main-editor').classList.add('hidden')
+    document.querySelector('.main-editor').style.display = 'none'
     document.querySelector('.main-gallery').classList.remove('hidden')
 }
 
 function onSelectImage(idx) {
-    document.querySelector('.main-editor').classList.remove('hidden')
+    document.querySelector('.main-editor').style.display = 'flex'
     document.querySelector('.main-gallery').classList.add('hidden')
 
     editMeme('image', idx)

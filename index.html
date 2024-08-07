@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/editor.css">
     <link rel="stylesheet" href="css/gallery.css">
+    <link rel="stylesheet" href="css/mq.css">
     <title>Meme Generator</title>
 </head>
 <body onload="onInit()">
@@ -20,20 +21,22 @@
         <section class="main-gallery">
             <article class="search-bar">
                 <input type="text" placeholder="Search">
-                <article class="search-words">
-                    funny
-                    men
-                    women
-                    angry
+                <article class="frequent-words">
+                    <article class="search-words">
+                        funny
+                        men
+                        women
+                        angry
+                    </article>
+                    <button>more</button>                  
                 </article>
-                <button>more</button>
             </article>
             <article class="gallery"></article>
         </section>
          
-        <section class="main-editor hidden">
+        <section class="main-editor ">
             <canvas class="main-canvas" width="500px" height="500px"></canvas>
-            <article class="tools">
+            <article class="tools hidden">
                 <input oninput="editText(event)" type="text" name="" id="text-box" placeholder="Add Text Here">
                 <article class="line-tools">
                     <button class="switch-line-btn" onclick="onSwitchLine()"><i class="fa-solid fa-right-left"></i></button>

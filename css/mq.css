@@ -1,0 +1,57 @@
+@media(min-width: 740px){
+    main{
+        width: 95vw;
+    }
+    
+    .main-gallery{
+        margin-inline: 1rem;
+    }
+
+    .gallery{
+        column-width: 200px;
+    }
+
+    header{
+        border-radius: 999px;
+        padding-inline: 5rem;
+        margin: 1rem .5rem;
+    }
+} 
+
+@media (min-width: 800px){
+    .search-bar{
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .gallery{
+        padding-inline: 1.5rem;
+    }
+
+    .search-bar input{
+        width: 540px;
+    }
+
+    .frequent-words{
+        width: calc(100% - 540px);
+        height: 55px;
+        justify-content: end;
+    }
+}
+
+@media (min-width: 1360px){
+    main{
+        width: 1260px;
+    }
+    
+    .main-gallery{
+        padding-inline: 1.5rem;
+        margin-block: 0.5rem 1rem;
+        margin-inline: auto;
+        border-radius: var(--border-radius);
+    }
+    
+    header{
+        margin-inline: 0;
+    }
+}
