@@ -168,7 +168,7 @@ function getEvPos(ev) {
 }
 
 function outlineSelectedLine(){
-    let lineSizes = getWidthAndHeight()
+    let lineSizes = getLineSizes()
     let meme = getMeme()
     let {width, height, idx} = lineSizes[meme.selectedLineIdx]
     let {pos} = meme.lines[idx]

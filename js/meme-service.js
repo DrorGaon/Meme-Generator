@@ -92,7 +92,7 @@ function addLine(){
 
 function isLineClicked({x, y}){
     const res = {isClicked: false, idx: 0}
-    const lineSizes = getWidthAndHeight()
+    const lineSizes = getLineSizes()
     gMeme.lines.forEach((line, idx) => {
         const {width, height} = lineSizes[idx]
         if(Math.abs(line.pos.x - x) < width / 2 && Math.abs(line.pos.y - y) < height / 2){
@@ -104,10 +104,11 @@ function isLineClicked({x, y}){
     return res
 }
 
-function getWidthAndHeight(){
+function getLineSizes(){
     let lineSizes = []
     lineSizes = gMeme.lines.map((line, idx) => {
         // console.log(line)
+        gCtx.font = `${line.size}px Arial`
         let width = gCtx.measureText(line.text).width
         let height = gCtx.measureText(line.text).fontBoundingBoxAscent + gCtx.measureText(line.text).fontBoundingBoxDescent
         let size = {width, height, idx}
