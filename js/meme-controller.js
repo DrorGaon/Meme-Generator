@@ -41,6 +41,36 @@ function onSelectImage(idx) {
     }
 }
 
+function renderMeme() {
+    const meme = getMeme()
+    const {lines} = meme
+    const elImg = new Image()
+    elImg.src = `img/${meme.selectedImgId}.jpg`
+    gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
+
+    lines.forEach(line => {
+        let { text, color, size, pos } = line
+        if(!text){
+            text = 'Sample text'
+            editMeme('text', text)
+        } 
+
+        gCtx.beginPath()
+        gCtx.lineWidth = 2
+        gCtx.strokeStyle = 'black'
+        gCtx.fillStyle = color
+        gCtx.font = `${size}px Arial`
+        gCtx.textAlign = 'center'
+        gCtx.textBaseline = 'middle'
+    
+        gCtx.fillText(text, pos.x, pos.y)
+        gCtx.strokeText(text, pos.x, pos.y)
+    })
+
+    outlineSelectedLine()
+    renderMemeValues()
+}
+
 function changeColor({ target }) {
     document.querySelector('.text-color').style.color = target.value
     editMeme('text-color', target.value)
@@ -51,32 +81,6 @@ function editText({ target }) {
     editMeme('text', target.value)
     const meme = getMeme()
     renderMeme()
-}
-
-function renderMeme() {
-    const meme = getMeme()
-    const {lines} = meme
-    const { text, color, size, pos } = meme.lines[meme.selectedLineIdx]
-    const { x, y } = pos
-    const elImg = new Image()
-    elImg.src = `img/${meme.selectedImgId}.jpg`
-    gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
-
-    lines.forEach(line => {
-        gCtx.beginPath()
-        gCtx.lineWidth = 2
-        gCtx.strokeStyle = 'black'
-        gCtx.fillStyle = line.color
-        gCtx.font = `${line.size}px Arial`
-        gCtx.textAlign = 'center'
-        gCtx.textBaseline = 'middle'
-    
-        gCtx.fillText(line.text, line.pos.x, line.pos.y)
-        gCtx.strokeText(line.text, line.pos.x, line.pos.y)
-    })
-
-    outlineSelectedLine()
-    document.querySelector('#text-size').value = size
 }
 
 function downloadImg(elLink) {
