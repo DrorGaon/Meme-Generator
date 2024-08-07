@@ -72,7 +72,7 @@ function renderMeme() {
     renderMemeValues()
 }
 
-function changeColor({ target }) {
+function onChangeColor({ target }) {
     document.querySelector('.text-color').style.color = target.value
     editMeme('text-color', target.value)
     renderMeme()
@@ -118,7 +118,7 @@ function onDeleteLine(){
 
 function onChangeFont({target}){
    editMeme('font', target.value)
-    renderMeme()
+   renderMeme()
 }
 
 function onDown(ev) {
