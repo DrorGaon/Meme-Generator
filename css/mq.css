@@ -54,4 +54,8 @@
     header{
         margin-inline: 0;
     }
+
+    .main-editor{
+        flex-direction: row;
+    }
 }

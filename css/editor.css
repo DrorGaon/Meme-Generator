@@ -1,10 +1,16 @@
 .main-editor{
     display: flex;
-    justify-content: space-evenly;
+    flex-direction: column;
+    gap: 1.5rem;
+
     background-color: var(--primary-2);
+    margin: auto;
 }
 
 .main-canvas{
+    width: min(90vw, 500px);
+    height: min(90vw, 500px);
+
     border-radius: var(--border-radius);
 }
 
@@ -15,8 +21,8 @@
     gap: 1rem;
 
     background-color: var(--primary-1);
-    width: 500px;
-    height: 500px;
+    width: min(90vw, 500px);
+    height: min(90vw, 500px);
     padding: 1rem;
     border-radius: var(--border-radius);
 }
@@ -31,8 +37,8 @@
 }
 
 #text-box{
-    width: 450px;
-    height: 60px;
+    width: min(450px, 95%);
+    height: min(60px, 15%);
     padding-inline: 1rem;
     border-radius: 999px;
     border: none;
@@ -48,8 +54,8 @@
 }
 
 .line-tools button{
-    width: 50px;
-    height: 50px;
+    width: min(50px, 15vw);
+    height: min(50px, 15vw);
     border: none;
     border-radius: var(--button-border-radius);
 
@@ -103,20 +109,22 @@
     justify-content: center;
     align-items: center;
 
-    width: 450px;
-    height: 155px;
+    width: min(450px, 95%);
+    height: min(155px, 40%);
     background-color: #19A59F;
     padding: .5rem 1rem;
     border-radius: var(--border-radius);
 }
 
 .size-tools{
+    display: flex;
+    align-items: center;
     grid-column: span 2;
 }
 
 .size-tools input{
-    width: 75px;
-    height: 50px;
+    width: min(75px, 15vw);
+    height: min(50px, 10vw);
     padding: 0;
     border: none;
     border-radius: var(--button-border-radius);
@@ -129,17 +137,24 @@
     box-shadow: var(--editor-btn-shadow);
 }
 
-.size-tools button{    
-    width: 30px;
-    height: 30px;
+.size-tools button{   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: min(30px, 5vw);
+    height: min(30px, 5vw);
     background-color:rgba(211, 211, 211, 0.2) ;
     padding: 0;
     border: none;
     border-radius: var(--button-border-radius);
 
     font-size: 1.5rem;
-    line-height: 30px;
     transition: background-color var(--button-transition);
+}
+
+.size-tools i{
+    font-size: 1.25rem;
 }
 
 .size-tools button:hover{
@@ -157,8 +172,8 @@ input::-webkit-inner-spin-button {
 }
 
 .font-tools select{
-    width: 200px;
-    height: 50px;
+    width: min(215px, 40vw);
+    height: min(50px, 10vw);
     border: none;
     padding-inline: .75rem;
     border-radius: var(--button-border-radius);
@@ -185,8 +200,8 @@ input::-webkit-inner-spin-button {
     justify-content: center;
     align-items: center;
 
-    width: 50px;
-    height: 50px;
+    width: min(50px, 12vw);
+    height: min(50px, 12vw);
     background-color: rgb(255, 255, 255);
     border-radius: var(--button-border-radius);
 
@@ -197,8 +212,8 @@ input::-webkit-inner-spin-button {
 }
 
 .align-btn{
-    width: 50px;
-    height: 50px;
+    width: min(50px, 12vw);
+    height: min(50px, 12vw);
     border: none;
     border-radius: var(--button-border-radius);
 
