@@ -182,3 +182,18 @@ function outlineSelectedLine(){
     gCtx.rect((pos.x - width / 2) - 5, (pos.y - height / 2) - 5 ,width + 10, height + 5)
     gCtx.stroke()
 }
+
+function renderMemeValues(){
+    const meme = getMeme()
+    const {lines} = meme
+    const selectedLine = meme.lines[meme.selectedLineIdx]
+
+    document.querySelector('#text-size').value = selectedLine.size
+    const elTextBox = document.querySelector('#text-box')
+    const placeholder = selectedLine.text
+    if (placeholder === 'Sample text') elTextBox.value = ''
+    else elTextBox.value = placeholder
+
+    const elTextColor = document.querySelector('.text-color')
+    elTextColor.style.color = selectedLine.color
+}

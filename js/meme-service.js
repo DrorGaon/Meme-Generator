@@ -29,7 +29,7 @@ let gMeme = {
         {
             text: 'Sample text',
             size: 42,
-            color: 'white',
+            color: 'gray',
             pos: {x: 250, y:250},
         }
     ],
@@ -71,11 +71,7 @@ function editMeme(target, value){
 }
 
 function setSelectedLine(idx){
-    gMeme.selectedLineIdx = idx
-    const elTextBox = document.querySelector('#text-box')
-    const placeholder = gMeme.lines[gMeme.selectedLineIdx].text
-    if (placeholder === 'Sample text') elTextBox.value = ''
-    else elTextBox.value = placeholder
+    gMeme.selectedLineIdx = idx //visual changes handled in controller
 }
 
 function addLine(){
@@ -84,7 +80,7 @@ function addLine(){
         {
             text: 'Sample text',
             size: 42,
-            color: 'white',
+            color: 'gray',
             pos: {x: x + 20, y: y + 20},
         })
     gMeme.selectedLineIdx = gMeme.lines.length-1
