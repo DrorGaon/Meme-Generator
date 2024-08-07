@@ -27,6 +27,7 @@
 
 .tools button{
     color: var(--primary-2);
+    cursor: pointer;
 }
 
 #text-box{
@@ -52,7 +53,6 @@
     border: none;
     border-radius: var(--button-border-radius);
 
-    cursor: pointer;
     transition: filter var(--button-transition);
 }
 
@@ -127,7 +127,6 @@
     font-weight: bold;
     margin-inline: 0.25rem;
     box-shadow: var(--editor-btn-shadow);
-
 }
 
 .size-tools button{    
@@ -139,7 +138,6 @@
     border-radius: var(--button-border-radius);
 
     font-size: 1.5rem;
-    cursor: pointer;
     line-height: 30px;
     transition: background-color var(--button-transition);
 }
@@ -193,7 +191,20 @@ input::-webkit-inner-spin-button {
     border-radius: var(--button-border-radius);
 
     font-size: 1.35rem;
-    box-shadow: var(--editor-btn-shadow);
     cursor: pointer;
+    box-shadow: var(--editor-btn-shadow);
     z-index: 10;
+}
+
+.align-btn{
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: var(--button-border-radius);
+
+    box-shadow: var(--editor-btn-shadow);
+}
+
+.align-btn i{
+    font-size: 1.5rem;
 }

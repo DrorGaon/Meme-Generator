@@ -108,6 +108,22 @@ function deleteLine(){
     if(gMeme.selectedLineIdx === lines.length) gMeme.selectedLineIdx = 0
 }
 
+function alignText(direction){
+    if(direction === 'center'){
+        gMeme.lines[gMeme.selectedLineIdx].pos.x = 250
+        return
+    }
+
+    const sizes = getLineSizes() 
+    const size = sizes[gMeme.selectedLineIdx]
+    let {width} = size
+    if(direction === 'left'){
+        gMeme.lines[gMeme.selectedLineIdx].pos.x = width / 2 + 20
+    } else {
+        gMeme.lines[gMeme.selectedLineIdx].pos.x = gElCanvas.width - width / 2 - 20
+    }
+}
+
 function isLineClicked({x, y}){
     const res = {isClicked: false, idx: 0}
     const lineSizes = getLineSizes()
@@ -125,15 +141,12 @@ function isLineClicked({x, y}){
 function getLineSizes(){
     let lineSizes = []
     lineSizes = gMeme.lines.map((line, idx) => {
-        // console.log(idx)
         gCtx.font = `${line.size}px ${line.font}`
         let width = gCtx.measureText(line.text).width
         let height = gCtx.measureText(line.text).fontBoundingBoxAscent + gCtx.measureText(line.text).fontBoundingBoxDescent
         let size = {width, height, idx}
-        // console.log(size)
         return size
     })
-    // console.log(lineSizes)
     return lineSizes
 }
 

@@ -121,6 +121,11 @@ function onChangeFont({target}){
    renderMeme()
 }
 
+function onAlignText(direction){
+    alignText(direction)
+    renderMeme()
+}
+
 function onDown(ev) {
     const pos = getEvPos(ev)
     const res = isLineClicked(pos)
