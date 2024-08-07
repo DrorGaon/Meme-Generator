@@ -86,7 +86,7 @@ function setSelectedLine(idx){
 
 function addLine(){
     let x, y
-    if(!gMeme.lines.length){
+    if(!gMeme.lines.length || gMeme.selectedLineIdx === -1){
         x = 250
         y = 60
     } else {

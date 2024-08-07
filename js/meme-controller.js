@@ -73,14 +73,17 @@ function renderMeme() {
 }
 
 function onChangeColor({ target }) {
+    const meme = getMeme()
+    if(meme.selectedLineIdx === -1) return
     document.querySelector('.text-color').style.color = target.value
     editMeme(target.id, target.value)
     renderMeme()
 }
 
 function editText({ target }) {
-    editMeme('text', target.value)
     const meme = getMeme()
+    if(meme.selectedLineIdx === -1) return
+    editMeme('text', target.value)
     renderMeme()
 }
 
@@ -90,6 +93,8 @@ function downloadImg(elLink) {
 }
 
 function onTextSizeChange(elInput) {
+    const meme = getMeme()
+    if(meme.selectedLineIdx === -1) return
     let { value } = elInput
     if (!value) {
         if (elInput.innerText === "-") editMeme('decrease')
@@ -112,16 +117,22 @@ function onAddLine(){
 }
 
 function onDeleteLine(){
+    const meme = getMeme()
+    if(meme.selectedLineIdx === -1) return
     deleteLine()
     renderMeme()
 }
 
 function onChangeFont({target}){
+    const meme = getMeme()
+    if(meme.selectedLineIdx === -1) return
    editMeme('font', target.value)
    renderMeme()
 }
 
 function onAlignText(direction){
+    const meme = getMeme()
+    if(meme.selectedLineIdx === -1) return
     alignText(direction)
     renderMeme()
 }
@@ -129,7 +140,11 @@ function onAlignText(direction){
 function onDown(ev) {
     const pos = getEvPos(ev)
     const res = isLineClicked(pos)
-    if (!res.isClicked) return
+    if (!res.isClicked) {
+        setSelectedLine(-1)
+        renderMeme()
+        return
+    }
 
     setSelectedLine(res.idx)
     renderMeme()
@@ -190,6 +205,7 @@ function getEvPos(ev) {
 function outlineSelectedLine(){
     let lineSizes = getLineSizes()
     let meme = getMeme()
+    if(meme.selectedLineIdx === -1) return
     let {width, height, idx} = lineSizes[meme.selectedLineIdx]
     let {pos} = meme.lines[idx]
 
@@ -201,6 +217,7 @@ function outlineSelectedLine(){
 
 function renderMemeValues(){
     const meme = getMeme()
+    if(meme.selectedLineIdx === -1) return
     const {lines} = meme
     const selectedLine = lines[meme.selectedLineIdx]
 
