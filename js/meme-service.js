@@ -15,7 +15,7 @@ const defaultLine = {
     font: 'Impact',
     color: 'gray',
     outline: 'black',
-    pos: {x: 250, y:60},
+    pos: {x: 0.5, y: 0.12},
 }
 
 function resetMeme(){
@@ -121,8 +121,8 @@ function setSelectedLine(idx){
 function addLine(){
     const line = structuredClone(defaultLine)
     if(gMeme.lines.length && gMeme.selectedLineIdx !== -1){
-        line.pos.x = gMeme.lines[gMeme.selectedLineIdx].pos.x + 20
-        line.pos.y = gMeme.lines[gMeme.selectedLineIdx].pos.y + 20
+        line.pos.x = gMeme.lines[gMeme.selectedLineIdx].pos.x + 0.04
+        line.pos.y = gMeme.lines[gMeme.selectedLineIdx].pos.y + 0.04
     } 
     gMeme.lines.push(line)
     gMeme.selectedLineIdx = gMeme.lines.length-1
@@ -140,7 +140,7 @@ function deleteLine(){
 
 function alignText(direction){
     if(direction === 'center'){
-        gMeme.lines[gMeme.selectedLineIdx].pos.x = 250
+        gMeme.lines[gMeme.selectedLineIdx].pos.x = 0.5
         _saveToStorage(MEME_KEY, gMeme)
         return
     }
@@ -148,10 +148,12 @@ function alignText(direction){
     const sizes = getLineSizes() 
     const size = sizes[gMeme.selectedLineIdx]
     let {width} = size
+    width /= gElCanvas.width
+
     if(direction === 'left'){
-        gMeme.lines[gMeme.selectedLineIdx].pos.x = width / 2 + 20
+        gMeme.lines[gMeme.selectedLineIdx].pos.x = width / 2 + 0.04
     } else {
-        gMeme.lines[gMeme.selectedLineIdx].pos.x = gElCanvas.width - width / 2 - 20
+        gMeme.lines[gMeme.selectedLineIdx].pos.x = 1 - width / 2 - 0.04
     }
     _saveToStorage(MEME_KEY, gMeme)
 }
@@ -160,7 +162,9 @@ function isLineClicked({x, y}){
     const res = {isClicked: false, idx: 0}
     const lineSizes = getLineSizes()
     gMeme.lines.forEach(({pos}, idx) => {
-        const {width, height} = lineSizes[idx]
+        let {width, height} = lineSizes[idx]
+        width /= gElCanvas.width
+        height /= gElCanvas.height
         if(Math.abs(pos.x - x) < width / 2 && Math.abs(pos.y - y) < height / 2){
             res.isClicked = true
             res.idx = idx
@@ -190,7 +194,7 @@ function setLineDrag(isDrag){
 function moveLine(dx, dy){
     if(gMeme.selectedLineIdx === -1) return
     gMeme.lines[gMeme.selectedLineIdx].pos.x += dx
-    gMeme.lines[gMeme.selectedLineIdx].pos.y += dy
+    gMeme.lines[gMeme.selectedLineIdx].pos.y += dy 
     _saveToStorage(MEME_KEY, gMeme)
 }
 

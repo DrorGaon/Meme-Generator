@@ -8,10 +8,12 @@
 }
 
 .main-canvas{
-    width: min(90vw, 500px);
-    height: min(90vw, 500px);
-
     border-radius: var(--border-radius);
+}
+
+.canvas-container{
+    width: min(500px, 90vw);
+    height: min(500px, 90vw);
 }
 
 .tools{

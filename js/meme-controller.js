@@ -17,7 +17,7 @@ function onInit() {
     addListeners()
 }
 
-function renderImgs(){
+function renderImgs() {
     const elGallery = document.querySelector('.gallery')
     let strHTML = ''
     getImgs().map(({ url, id }) => {
@@ -29,12 +29,12 @@ function renderImgs(){
     elGallery.innerHTML = strHTML
 }
 
-function onFilterImgs({target}){
+function onFilterImgs({ target }) {
     filterImgs(target.value)
     renderImgs()
 }
 
-function loadSavedMemes(){
+function loadSavedMemes() {
     document.querySelector('.main-editor').style.display = 'none'
     document.querySelector('.main-gallery').classList.add('hidden')
     document.querySelector('.saved-memes').classList.remove('hidden')
@@ -53,15 +53,15 @@ function onSelectImage(idx) {
     document.querySelector('.main-gallery').classList.add('hidden')
     document.querySelector('.saved-memes').classList.add('hidden')
 
-    const {selectedImgId} = getMeme()
-    if(selectedImgId + '' !== idx) resetMeme()
-    
+    const { selectedImgId } = getMeme()
+    if (selectedImgId + '' !== idx) resetMeme()
+
     editMeme('image', idx)
     const elImg = new Image()
     elImg.src = `img/${idx}.jpg`
     elImg.onload = () => {
         gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height)
-        renderMeme()
+        resizeCanvas()
     }
 }
 
@@ -75,6 +75,8 @@ function renderMeme() {
 
     lines.forEach(line => {
         let { text, color, outline, size, pos, font } = line
+        pos.x *= gElCanvas.width
+        pos.y *= gElCanvas.height
         if (!text) {
             text = 'Sample text'
             editMeme('text', text)
@@ -87,6 +89,7 @@ function renderMeme() {
         gCtx.font = `${size}px ${font}`
         gCtx.textAlign = 'center'
         gCtx.textBaseline = 'middle'
+
 
         gCtx.fillText(text, pos.x, pos.y)
         gCtx.strokeText(text, pos.x, pos.y)
@@ -196,6 +199,7 @@ function addListeners() {
     addMouseListeners()
     addTouchListeners()
     addKeyboardListeners()
+    window.addEventListener('resize', resizeCanvas)
 }
 
 function addMouseListeners() {
@@ -214,28 +218,39 @@ function addKeyboardListeners() {
     window.addEventListener('keydown', onKeyboardPress)
 }
 
+function resizeCanvas() {
+    const elContainer = document.querySelector('.canvas-container')
+
+    const containerWidth = elContainer.clientWidth;
+    const containerHeight = elContainer.clientHeight;
+
+    gElCanvas.height = containerHeight;
+    gElCanvas.width = containerWidth;
+    renderMeme()
+}
+
 function onKeyboardPress(ev) {
     const elTextBox = document.querySelector('#text-box')
     const elTextSize = document.querySelector('#text-size')
     const elGallery = document.querySelector('.main-gallery')
-    
-    if(!elGallery.classList.contains('hidden')) return
-    if(ev.target === elTextBox || ev.target === elTextSize) return
+
+    if (!elGallery.classList.contains('hidden')) return
+    if (ev.target === elTextBox || ev.target === elTextSize) return
 
     ev.preventDefault()
     switch (ev.code) {
         case 'ArrowRight':
-            moveLine(5, 0)
-            break;    
+            moveLine(0.01, 0)
+            break;
         case 'ArrowLeft':
-            moveLine(-5, 0)
-            break;    
+            moveLine(-0.01, 0)
+            break;
         case 'ArrowUp':
-            moveLine(0, -5)
-            break;    
+            moveLine(0, -0.01)
+            break;
         case 'ArrowDown':
-            moveLine(0, 5)
-            break;    
+            moveLine(0, 0.01)
+            break;
     }
     renderMeme()
 }
@@ -254,6 +269,8 @@ function getEvPos(ev) {
             y: ev.pageY - ev.target.offsetTop - ev.target.clientTop,
         }
     }
+    pos.x /= gElCanvas.width
+    pos.y /= gElCanvas.height
     return pos
 }
 
@@ -263,6 +280,9 @@ function outlineSelectedLine() {
     if (meme.selectedLineIdx === -1) return
     let { width, height, idx } = lineSizes[meme.selectedLineIdx]
     let { pos } = meme.lines[idx]
+
+    pos.x *= gElCanvas.width
+    pos.y *= gElCanvas.height
 
     gCtx.beginPath()
     gCtx.setLineDash([10, 10])
@@ -291,12 +311,12 @@ function renderMemeValues() {
     elTextOutline.style.color = selectedLine.outline
 }
 
-function onSaveMeme(){
+function onSaveMeme() {
     saveMeme()
 }
 
-function onLoadMeme(idx){
+function onLoadMeme(idx) {
     loadMeme(idx)
-    const {selectedImgId} = getMeme()
+    const { selectedImgId } = getMeme()
     onSelectImage(selectedImgId)
 }
