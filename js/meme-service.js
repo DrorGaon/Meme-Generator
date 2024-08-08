@@ -3,6 +3,7 @@
 
 const MEME_KEY = 'gMeme'
 const IMG_KEY = 'gImgs'
+const SAVED_MEMES_KEY = 'savedMemes'
 
 let gImgs 
 let gMeme 
@@ -176,4 +177,35 @@ function moveLine(dx, dy){
     gMeme.lines[gMeme.selectedLineIdx].pos.x += dx
     gMeme.lines[gMeme.selectedLineIdx].pos.y += dy
     _saveToStorage(MEME_KEY, gMeme)
+}
+
+function saveMeme(){
+    let savedMemes
+    let memeDataUrl = gElCanvas.toDataURL()
+    const memeToSave = structuredClone(gMeme)
+    if(!localStorage.getItem(SAVED_MEMES_KEY)){
+        savedMemes = [{memeToSave, memeDataUrl}]
+    } else {
+        savedMemes = _loadFromStorage(SAVED_MEMES_KEY)
+        savedMemes.push({memeToSave, memeDataUrl})
+    }
+    _saveToStorage(SAVED_MEMES_KEY, savedMemes)
+}
+
+function loadMemes(){
+    const savedMemes = _loadFromStorage(SAVED_MEMES_KEY)
+    let imgHtml = ''
+    savedMemes.forEach((meme, idx) => {
+        imgHtml += 
+        `<img onclick="onLoadMeme('${idx}')" 
+        src="${meme.memeDataUrl}" alt="">
+        `
+    })
+    document.querySelector('.saved-memes-container').innerHTML = imgHtml
+}
+
+function loadMeme(idx){
+    const savedMemes = _loadFromStorage(SAVED_MEMES_KEY)
+    const meme = savedMemes[idx]
+    _saveToStorage(MEME_KEY, meme.memeToSave)
 }

@@ -15,7 +15,10 @@
 
         <header>
             <h1>Meme it!</h1>
-            <h2 onclick="loadGallery()">Gallery</h2>
+            <article class="nav">
+                <h2 onclick="loadGallery()">Gallery</h2>
+                <h2 onclick="loadSavedMemes()">Saved</h2>
+            </article>
         </header>
 
         <section class="main-gallery">
@@ -81,8 +84,13 @@
                     <button onclick="onAlignText('right')" class="align-btn"><i class="fa-solid fa-align-right"></i></button>
                 </article>
                 <a onclick="downloadImg(this)" class="download" href="#" download="my-meme.jpg">Download</a>
+                <button onclick="(onSaveMeme())">Save</button>
                 
             </article>
+        </section>
+
+        <section class="saved-memes hidden">
+            <article class="saved-memes-container"></article>
         </section>
     </main>
 

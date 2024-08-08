@@ -24,14 +24,24 @@ function onInit() {
     addListeners()
 }
 
+function loadSavedMemes(){
+    document.querySelector('.main-editor').style.display = 'none'
+    document.querySelector('.main-gallery').classList.add('hidden')
+    document.querySelector('.saved-memes').classList.remove('hidden')
+
+    loadMemes()
+}
+
 function loadGallery() {
     document.querySelector('.main-editor').style.display = 'none'
     document.querySelector('.main-gallery').classList.remove('hidden')
+    document.querySelector('.saved-memes').classList.add('hidden')
 }
 
 function onSelectImage(idx) {
     document.querySelector('.main-editor').style.display = 'flex'
     document.querySelector('.main-gallery').classList.add('hidden')
+    document.querySelector('.saved-memes').classList.add('hidden')
 
     const {selectedImgId} = getMeme()
     if(selectedImgId + '' !== idx) resetMeme()
@@ -269,4 +279,14 @@ function renderMemeValues() {
 
     const elTextOutline = document.querySelector('.text-outline')
     elTextOutline.style.color = selectedLine.outline
+}
+
+function onSaveMeme(){
+    saveMeme()
+}
+
+function onLoadMeme(idx){
+    loadMeme(idx)
+    const {selectedImgId} = getMeme()
+    onSelectImage(selectedImgId)
 }
