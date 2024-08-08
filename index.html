@@ -23,7 +23,20 @@
 
         <section class="main-gallery">
             <article class="search-bar">
-                <input oninput="onFilterImgs(event)" type="text" placeholder="Search">
+                <input oninput="onFilterImgs(event)" type="text" placeholder="Search" list="search-words">
+                <datalist id="search-words">
+                    <option value="angry">angry</option>
+                    <option value="cute">cute</option>
+                    <option value="person">person</option>
+                    <option value="politics">politics</option>
+                    <option value="happy">happy</option>
+                    <option value="animals">animals</option>
+                    <option value="crazy">crazy</option>
+                    <option value="serious">serious</option>
+                    <option value="love">love</option>
+                    <option value="baby">baby</option>
+                    <option value="surprised">surprised</option>
+                </datalist>
                 <article class="frequent-words">
                     <article class="search-words">
                         funny
@@ -42,7 +55,7 @@
                 <canvas class="main-canvas"></canvas>
             </article>
             <article class="tools">
-                <input oninput="editText(event)" type="text" name="" id="text-box" placeholder="Add Text Here">
+                <input oninput="editText(event)" type="text" name="" id="text-box" placeholder="Add Text Here" autocomplete="off">
                 <article class="line-tools">
                     <button class="switch-line-btn" onclick="onSwitchLine()"><i class="fa-solid fa-right-left"></i></button>
                     <button class="add-line-btn" onclick="onAddLine()"><i class="fa-solid fa-plus"></i></button>
@@ -52,7 +65,7 @@
                 <article class="text-tools">
                     <article class="size-tools">
                         <button onclick="onTextSizeChange(this)"><i class="fa-solid fa-minus"></i></button>
-                        <input onchange="onTextSizeChange(this)" type="number" name="text-size" id="text-size" value="42">
+                        <input onchange="onTextSizeChange(this)" type="number" name="text-size" id="text-size" value="42" autocomplete="off">
                         <button onclick="onTextSizeChange(this)"><i class="fa-solid fa-plus"></i></button>
                     </article>
                     <article class="font-tools">

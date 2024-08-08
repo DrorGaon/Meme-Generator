@@ -30,6 +30,7 @@ function renderImgs() {
 }
 
 function onFilterImgs({ target }) {
+    console.log(target.value)
     filterImgs(target.value)
     renderImgs()
 }

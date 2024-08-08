@@ -30,7 +30,7 @@ function getImgs(){
     if(gFilter) return gFilter
     if(!localStorage.getItem(IMG_KEY)){
         _saveToStorage(IMG_KEY,[
-                {id: 1, url: 'img/1.jpg', keywords: ['anrgry', 'person', 'politics'],},
+                {id: 1, url: 'img/1.jpg', keywords: ['angry', 'person', 'politics'],},
                 {id: 2, url: 'img/2.jpg', keywords: ['cute', 'animals'],},
                 {id: 3, url: 'img/3.jpg', keywords: ['happy', 'cute', 'animals', 'baby'],},
                 {id: 4, url: 'img/4.jpg', keywords: ['animals', 'cute'],},
