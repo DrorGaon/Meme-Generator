@@ -1,41 +1,11 @@
 'use strict'
 
-const gImgs = [
-    {id: 1, url: 'img/1.jpg', keywords: ['haha'],},
-    {id: 2, url: 'img/2.jpg', keywords: ['haha'],},
-    {id: 3, url: 'img/3.jpg', keywords: ['haha'],},
-    {id: 4, url: 'img/4.jpg', keywords: ['haha'],},
-    {id: 5, url: 'img/5.jpg', keywords: ['haha'],},
-    {id: 6, url: 'img/6.jpg', keywords: ['haha'],},
-    {id: 7, url: 'img/7.jpg', keywords: ['haha'],},
-    {id: 8, url: 'img/8.jpg', keywords: ['haha'],},
-    {id: 9, url: 'img/9.jpg', keywords: ['haha'],},
-    {id: 10, url: 'img/10.jpg', keywords: ['haha'],},
-    {id: 11, url: 'img/11.jpg', keywords: ['haha'],},
-    {id: 12, url: 'img/12.jpg', keywords: ['haha'],},
-    {id: 13, url: 'img/13.jpg', keywords: ['haha'],},
-    {id: 14, url: 'img/14.jpg', keywords: ['haha'],},
-    {id: 15, url: 'img/15.jpg', keywords: ['haha'],},
-    {id: 16, url: 'img/16.jpg', keywords: ['haha'],},
-    {id: 17, url: 'img/17.jpg', keywords: ['haha'],},
-    {id: 18, url: 'img/18.jpg', keywords: ['haha'],},
-]
 
-const gMeme = {
-    selectedImgId: 1,
-    selectedLineIdx: 0,
-    isDrag: false,
-    lines: [
-        {
-            text: 'Sample text',
-            size: 42,
-            font: 'Impact',
-            color: 'gray',
-            outline: 'black',
-            pos: {x: 250, y:60},
-        }
-    ],
-}
+const MEME_KEY = 'gMeme'
+const IMG_KEY = 'gImgs'
+
+let gImgs 
+let gMeme 
 
 const defaultLine = {
     text: 'Sample text',
@@ -55,10 +25,43 @@ function resetMeme(){
 }
 
 function getImgs(){
+    if(!localStorage.getItem(IMG_KEY)){
+        _saveToStorage(IMG_KEY,[
+                {id: 1, url: 'img/1.jpg', keywords: ['haha'],},
+                {id: 2, url: 'img/2.jpg', keywords: ['haha'],},
+                {id: 3, url: 'img/3.jpg', keywords: ['haha'],},
+                {id: 4, url: 'img/4.jpg', keywords: ['haha'],},
+                {id: 5, url: 'img/5.jpg', keywords: ['haha'],},
+                {id: 6, url: 'img/6.jpg', keywords: ['haha'],},
+                {id: 7, url: 'img/7.jpg', keywords: ['haha'],},
+                {id: 8, url: 'img/8.jpg', keywords: ['haha'],},
+                {id: 9, url: 'img/9.jpg', keywords: ['haha'],},
+                {id: 10, url: 'img/10.jpg', keywords: ['haha'],},
+                {id: 11, url: 'img/11.jpg', keywords: ['haha'],},
+                {id: 12, url: 'img/12.jpg', keywords: ['haha'],},
+                {id: 13, url: 'img/13.jpg', keywords: ['haha'],},
+                {id: 14, url: 'img/14.jpg', keywords: ['haha'],},
+                {id: 15, url: 'img/15.jpg', keywords: ['haha'],},
+                {id: 16, url: 'img/16.jpg', keywords: ['haha'],},
+                {id: 17, url: 'img/17.jpg', keywords: ['haha'],},
+                {id: 18, url: 'img/18.jpg', keywords: ['haha'],},
+            ]
+        )
+    }
+    gImgs = _loadFromStorage(IMG_KEY)
     return gImgs
 }
 
 function getMeme(){
+    if(!localStorage.getItem(MEME_KEY)){
+        _saveToStorage(MEME_KEY, {
+            selectedImgId: 1,
+            selectedLineIdx: 0,
+            isDrag: false,
+            lines:[structuredClone(defaultLine)]
+        })
+    }
+    gMeme = _loadFromStorage(MEME_KEY)
     return gMeme
 }
 
@@ -91,10 +94,12 @@ function editMeme(target, value){
             gMeme.lines[gMeme.selectedLineIdx].font = value
             break;
         }
+        _saveToStorage(MEME_KEY, gMeme)
 }
 
 function setSelectedLine(idx){
     gMeme.selectedLineIdx = idx //visual changes handled in controller
+    _saveToStorage(MEME_KEY, gMeme)
 }
 
 function addLine(){
@@ -105,6 +110,7 @@ function addLine(){
     } 
     gMeme.lines.push(line)
     gMeme.selectedLineIdx = gMeme.lines.length-1
+    _saveToStorage(MEME_KEY, gMeme)
 }
 
 function deleteLine(){
@@ -113,11 +119,13 @@ function deleteLine(){
 
     lines.splice(gMeme.selectedLineIdx, 1)
     if(gMeme.selectedLineIdx === lines.length) gMeme.selectedLineIdx = 0
+    _saveToStorage(MEME_KEY, gMeme)
 }
 
 function alignText(direction){
     if(direction === 'center'){
         gMeme.lines[gMeme.selectedLineIdx].pos.x = 250
+        _saveToStorage(MEME_KEY, gMeme)
         return
     }
 
@@ -129,6 +137,7 @@ function alignText(direction){
     } else {
         gMeme.lines[gMeme.selectedLineIdx].pos.x = gElCanvas.width - width / 2 - 20
     }
+    _saveToStorage(MEME_KEY, gMeme)
 }
 
 function isLineClicked({x, y}){
@@ -159,10 +168,12 @@ function getLineSizes(){
 
 function setLineDrag(isDrag){
     gMeme.isDrag = isDrag
+    _saveToStorage(MEME_KEY, gMeme)
 }
 
 function moveLine(dx, dy){
     if(gMeme.selectedLineIdx === -1) return
     gMeme.lines[gMeme.selectedLineIdx].pos.x += dx
     gMeme.lines[gMeme.selectedLineIdx].pos.y += dy
+    _saveToStorage(MEME_KEY, gMeme)
 }
