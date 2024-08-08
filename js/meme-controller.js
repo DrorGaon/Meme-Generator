@@ -76,13 +76,13 @@ function renderMeme() {
 
     lines.forEach(line => {
         let { text, color, outline, size, pos, font } = line
-        pos.x *= gElCanvas.width
-        pos.y *= gElCanvas.height
         if (!text) {
             text = 'Sample text'
             editMeme('text', text)
         }
-
+        pos.x *= gElCanvas.width
+        pos.y *= gElCanvas.height
+        
         gCtx.beginPath()
         gCtx.lineWidth = 2
         gCtx.strokeStyle = outline
@@ -90,8 +90,8 @@ function renderMeme() {
         gCtx.font = `${size}px ${font}`
         gCtx.textAlign = 'center'
         gCtx.textBaseline = 'middle'
-
-
+        
+        
         gCtx.fillText(text, pos.x, pos.y)
         gCtx.strokeText(text, pos.x, pos.y)
     })
