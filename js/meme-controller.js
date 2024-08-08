@@ -9,6 +9,15 @@ const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
 
 function onInit() {
     document.querySelector('.main-editor').style.display = 'none'
+
+    renderImgs()
+    gElCanvas = document.querySelector('.main-canvas')
+    gCtx = gElCanvas.getContext('2d')
+
+    addListeners()
+}
+
+function renderImgs(){
     const elGallery = document.querySelector('.gallery')
     let strHTML = ''
     getImgs().map(({ url, id }) => {
@@ -18,10 +27,11 @@ function onInit() {
     })
 
     elGallery.innerHTML = strHTML
+}
 
-    gElCanvas = document.querySelector('.main-canvas')
-    gCtx = gElCanvas.getContext('2d')
-    addListeners()
+function onFilterImgs({target}){
+    filterImgs(target.value)
+    renderImgs()
 }
 
 function loadSavedMemes(){

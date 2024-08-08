@@ -7,6 +7,7 @@ const SAVED_MEMES_KEY = 'savedMemes'
 
 let gImgs 
 let gMeme 
+let gFilter = ''
 
 const defaultLine = {
     text: 'Sample text',
@@ -26,31 +27,45 @@ function resetMeme(){
 }
 
 function getImgs(){
+    if(gFilter) return gFilter
     if(!localStorage.getItem(IMG_KEY)){
         _saveToStorage(IMG_KEY,[
-                {id: 1, url: 'img/1.jpg', keywords: ['haha'],},
-                {id: 2, url: 'img/2.jpg', keywords: ['haha'],},
-                {id: 3, url: 'img/3.jpg', keywords: ['haha'],},
-                {id: 4, url: 'img/4.jpg', keywords: ['haha'],},
-                {id: 5, url: 'img/5.jpg', keywords: ['haha'],},
-                {id: 6, url: 'img/6.jpg', keywords: ['haha'],},
-                {id: 7, url: 'img/7.jpg', keywords: ['haha'],},
-                {id: 8, url: 'img/8.jpg', keywords: ['haha'],},
-                {id: 9, url: 'img/9.jpg', keywords: ['haha'],},
-                {id: 10, url: 'img/10.jpg', keywords: ['haha'],},
-                {id: 11, url: 'img/11.jpg', keywords: ['haha'],},
-                {id: 12, url: 'img/12.jpg', keywords: ['haha'],},
-                {id: 13, url: 'img/13.jpg', keywords: ['haha'],},
-                {id: 14, url: 'img/14.jpg', keywords: ['haha'],},
-                {id: 15, url: 'img/15.jpg', keywords: ['haha'],},
-                {id: 16, url: 'img/16.jpg', keywords: ['haha'],},
-                {id: 17, url: 'img/17.jpg', keywords: ['haha'],},
-                {id: 18, url: 'img/18.jpg', keywords: ['haha'],},
+                {id: 1, url: 'img/1.jpg', keywords: ['anrgry', 'person', 'politics'],},
+                {id: 2, url: 'img/2.jpg', keywords: ['cute', 'animals'],},
+                {id: 3, url: 'img/3.jpg', keywords: ['happy', 'cute', 'animals', 'baby'],},
+                {id: 4, url: 'img/4.jpg', keywords: ['animals', 'cute'],},
+                {id: 5, url: 'img/5.jpg', keywords: ['happy', 'baby'],},
+                {id: 6, url: 'img/6.jpg', keywords: ['crazy', 'person'],},
+                {id: 7, url: 'img/7.jpg', keywords: ['baby', 'surprised'],},
+                {id: 8, url: 'img/8.jpg', keywords: ['person', 'crazy', 'happy'],},
+                {id: 9, url: 'img/9.jpg', keywords: ['baby', 'crazy', 'happy'],},
+                {id: 10, url: 'img/10.jpg', keywords: ['person', 'happy', 'politics'],},
+                {id: 11, url: 'img/11.jpg', keywords: ['person', 'love'],},
+                {id: 12, url: 'img/12.jpg', keywords: ['person', 'crazy', 'serious'],},
+                {id: 13, url: 'img/13.jpg', keywords: ['person', 'happy'],},
+                {id: 14, url: 'img/14.jpg', keywords: ['person', 'serious'],},
+                {id: 15, url: 'img/15.jpg', keywords: ['person', 'serious'],},
+                {id: 16, url: 'img/16.jpg', keywords: ['person', 'happy'],},
+                {id: 17, url: 'img/17.jpg', keywords: ['person', 'serious', 'politics'],},
+                {id: 18, url: 'img/18.jpg', keywords: ['crazy', 'happy'],},
             ]
         )
     }
     gImgs = _loadFromStorage(IMG_KEY)
     return gImgs
+}
+
+function filterImgs(filter){
+    if(!filter){
+        gFilter = ''
+        return
+    }
+
+    let filteredImgs = gImgs.filter(img => {
+        let searchWords = img.keywords.join(' ')
+        return (searchWords.includes(filter))
+    })
+    gFilter = filteredImgs
 }
 
 function getMeme(){
