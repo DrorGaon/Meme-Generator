@@ -233,9 +233,9 @@ function resizeCanvas() {
 function onKeyboardPress(ev) {
     const elTextBox = document.querySelector('#text-box')
     const elTextSize = document.querySelector('#text-size')
-    const elGallery = document.querySelector('.main-gallery')
-
-    if (!elGallery.classList.contains('hidden')) return
+    const elEditor = document.querySelector('.main-editor')
+    
+    if (elEditor.style.display === 'none') return
     if (ev.target === elTextBox || ev.target === elTextSize) return
 
     ev.preventDefault()
