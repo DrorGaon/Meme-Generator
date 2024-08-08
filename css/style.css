@@ -43,6 +43,11 @@ header{
     color: white;
 }
 
+.nav{
+    display: flex;
+    flex-direction: column;
+}
+
 header h2{
     cursor: pointer;
 }
