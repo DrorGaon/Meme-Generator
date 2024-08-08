@@ -3,6 +3,7 @@
 }
 
 :root{
+    --box-background: linear-gradient(90deg, rgba(57,59,66,1) 0%, rgba(99,103,115,1) 50%, rgba(57,59,66,1) 100%);
     --primary-1: #383B42;
     --primary-2: #22252C;
     --border-radius:15px ;

@@ -4,7 +4,7 @@ main{
 }
 
 .main-gallery{
-    background-color: var(--primary-1);
+    background: var(--box-background);
     border-radius: var(--border-radius);
     margin-block-end: .5rem;
 
@@ -56,7 +56,7 @@ header{
 }
 
 .saved-memes{
-    background-color: var(--primary-1);
+    background: var(--box-background);
     border-radius: var(--border-radius);
     margin: auto;
     width: 95%;

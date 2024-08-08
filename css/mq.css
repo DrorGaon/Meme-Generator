@@ -43,12 +43,13 @@
     .main-editor{
         flex-direction: row;
         gap: 3rem;
+        margin-block-end: 0;
     }
 
     .saved-memes-container img{
         margin-inline: 1rem;
     }
-    
+
 }
 
 @media (min-width: 1360px){

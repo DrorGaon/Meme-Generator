@@ -5,6 +5,7 @@
 
     background-color: var(--primary-2);
     margin: auto;
+    margin-block-end: 1.5rem;
 }
 
 .main-canvas{
@@ -22,7 +23,7 @@
     align-items: center;
     gap: 1rem;
 
-    background-color: var(--primary-1);
+    background: var(--box-background);
     width: min(90vw, 500px);
     height: min(90vw, 500px);
     padding: 1rem;
