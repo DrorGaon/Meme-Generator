@@ -12,9 +12,15 @@
     --button-transition: .3s
 }
 
+@font-face {
+    font-family: Quicksand;
+    src: url(/fonts/Quicksand-Medium.ttf);
+}
+
 body{
     background-color: var(--primary-2);
     margin: 0;
+    font-family: Quicksand;
 }
 
 h1, h2, h3, h4, h5, h6, p{
@@ -63,6 +69,10 @@ img{
 
 .hidden{
     display: none;
+}
+
+input, button, a{
+    font-family: Quicksand;
 }
 
 input:focus, select:focus{
