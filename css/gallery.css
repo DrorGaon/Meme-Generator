@@ -9,6 +9,7 @@ main{
     margin-block-end: .5rem;
 
     padding: 1rem;
+    padding-block-end: 0;
     margin: .5rem;
 }
 
@@ -52,4 +53,25 @@ header{
     border-radius: 0;
     padding-inline: 50px;
     margin: 0 0 1rem;
+}
+
+.saved-memes{
+    background-color: var(--primary-1);
+    border-radius: var(--border-radius);
+    margin: auto;
+    width: 95%;
+    min-height: 70vh;
+}
+
+.saved-memes-container{
+    width: 95%;
+    padding: 1rem;
+    padding-block-end: .5rem;
+    margin: auto;
+
+    text-align: center;
+}
+
+body{
+    overflow: hidden;
 }
