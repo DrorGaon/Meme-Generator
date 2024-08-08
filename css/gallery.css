@@ -70,4 +70,6 @@ header{
     margin: auto;
 
     text-align: center;
+    font-size: 64px;
+    text-wrap: balance;
 }

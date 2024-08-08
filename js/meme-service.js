@@ -213,6 +213,11 @@ function saveMeme(){
 
 function loadMemes(){
     const savedMemes = _loadFromStorage(SAVED_MEMES_KEY)
+    const savedGallery = document.querySelector('.saved-memes-container')
+    if(!savedMemes) {
+        savedGallery.innerText = 'You have no saved memes...'
+        return
+    }
     let imgHtml = ''
     savedMemes.forEach((meme, idx) => {
         imgHtml += 
