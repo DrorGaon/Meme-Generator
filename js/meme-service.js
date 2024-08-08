@@ -13,8 +13,8 @@ const defaultLine = {
     text: 'Sample text',
     size: 42,
     font: 'Impact',
-    color: 'gray',
-    outline: 'black',
+    color: 'black',
+    outline: 'gray',
     pos: {x: 0.5, y: 0.12},
 }
 
