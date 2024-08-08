@@ -39,7 +39,7 @@
          
         <section class="main-editor ">
             <canvas class="main-canvas" width="500px" height="500px"></canvas>
-            <article class="tools hidden">
+            <article class="tools">
                 <input oninput="editText(event)" type="text" name="" id="text-box" placeholder="Add Text Here">
                 <article class="line-tools">
                     <button class="switch-line-btn" onclick="onSwitchLine()"><i class="fa-solid fa-right-left"></i></button>
@@ -83,7 +83,9 @@
                     <button onclick="onAlignText('center')" class="align-btn"><i class="fa-solid fa-align-center"></i></button>
                     <button onclick="onAlignText('right')" class="align-btn"><i class="fa-solid fa-align-right"></i></button>
                 </article>
-                <a onclick="downloadImg(this)" class="download" href="#" download="my-meme.jpg">Download</a>
+                <article class="share-btns">
+                    <a onclick="downloadImg(this)" class="download" href="#" download="my-meme.jpg">Download</a>
+                </article>
                 <button onclick="(onSaveMeme())">Save</button>
                 
             </article>
