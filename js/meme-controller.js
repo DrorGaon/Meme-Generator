@@ -192,7 +192,7 @@ function onMove(ev) {
     renderMeme()
 }
 
-function onUp(ev) {
+function onUp() {
     setLineDrag(false)
 }
 
