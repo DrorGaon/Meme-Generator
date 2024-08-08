@@ -143,9 +143,9 @@ function alignText(direction){
 function isLineClicked({x, y}){
     const res = {isClicked: false, idx: 0}
     const lineSizes = getLineSizes()
-    gMeme.lines.forEach((line, idx) => {
+    gMeme.lines.forEach(({pos}, idx) => {
         const {width, height} = lineSizes[idx]
-        if(Math.abs(line.pos.x - x) < width / 2 && Math.abs(line.pos.y - y) < height / 2){
+        if(Math.abs(pos.x - x) < width / 2 && Math.abs(pos.y - y) < height / 2){
             res.isClicked = true
             res.idx = idx
         }
@@ -156,12 +156,12 @@ function isLineClicked({x, y}){
 
 function getLineSizes(){
     let lineSizes = []
-    lineSizes = gMeme.lines.map((line, idx) => {
-        gCtx.font = `${line.size}px ${line.font}`
-        let width = gCtx.measureText(line.text).width
-        let height = gCtx.measureText(line.text).fontBoundingBoxAscent + gCtx.measureText(line.text).fontBoundingBoxDescent
-        let size = {width, height, idx}
-        return size
+    lineSizes = gMeme.lines.map(({size, font, text}, idx) => {
+        gCtx.font = `${size}px ${font}`
+        let width = gCtx.measureText(text).width
+        let height = gCtx.measureText(text).fontBoundingBoxAscent + gCtx.measureText(text).fontBoundingBoxDescent
+        let dimensions = {width, height, idx}
+        return dimensions
     })
     return lineSizes
 }
