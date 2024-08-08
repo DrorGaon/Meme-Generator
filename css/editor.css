@@ -227,29 +227,46 @@ input::-webkit-inner-spin-button {
 .share-btns{
     display: flex;
     /* flex-direction: column; */
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
 
     width: 95%;
     height: calc(95% / 9);
-    padding: .5rem;
+    /* padding: .5rem; */
 
-    font-size: min(1.5rem, 4vw);
 }
 
-.share-btns a{
+.share-btns a, .share-btns button{
     display: flex;
     justify-content: center;
     align-items: center;
 
+    border-radius: var(--button-border-radius);
+    color: white;
+    font-size: min(1.5rem, 4vw);
+    font-family: Arial, Helvetica, sans-serif;
+    transition: filter var(--button-transition);
+
+}
+
+.share-btns a{
     width:45% ;
     aspect-ratio: 3.5 / 1 ;
     background-color: hsl(271, 70%, 50%);
-    border-radius: var(--button-border-radius);
 
     box-shadow: 1px 5px 0 hsl(271, 70%, 25%), inset 0 4px 0 hsl(271, 70%, 70%);
     color: white;
     font-family: Arial, Helvetica, sans-serif;
     text-decoration: none;
     transition: filter var(--button-transition);
+}
+
+.share-btns button{
+    width:45% ;
+    aspect-ratio: 3.5 / 1 ;
+    background-color: hsl(217, 67%, 50%);
+    border: none;
+
+    font-size: min(1.5rem, 4vw);
+    box-shadow: 1px 5px 0 hsl(217, 67%, 25%), inset 0 4px 0 hsl(217, 67%, 70%);
 }
